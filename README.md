@@ -2,25 +2,33 @@
 
 _⚠️ Disclaimer: This project is not affiliated with any real educational institution or company. EduWorld is a portfolio project created solely to showcase my full-stack development skills. All names, features, and content are for demonstration purposes only._
 
----
-
 <p align="center">
   <a href="https://drive.google.com/drive/folders/1hGJpzq83Luf3ZU3eaJoWdDkaDJ_uAF5h?usp=drive_link">
     <img src="https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue?style=for-the-badge&logo=google-drive" alt="Watch the Demo" />
   </a>
 </p>
 
----
+<h2>ScreenShots:</h2>
+<h3>Landing Page</h3>
+<img width="1919" height="904" alt="image" src="https://github.com/user-attachments/assets/1789a1c3-41f4-4615-a151-3bc322c21ef1" />
+
+<h3>Footer</h3>
+<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/f4862a35-0107-427e-a289-887aa03c8501" />
+
+<h3>UI Sneak Peak 👀</h3> 
+<img width="1112" height="908" alt="image" src="https://github.com/user-attachments/assets/1b22ac2b-16ec-4774-91fe-ae5706aeda2c" />
+
+<h3>Working of ChatBot</h3>
+
+<p>
+  <img src="https://github.com/user-attachments/assets/1fd84159-6e19-4c5f-8c3e-036a120efb9d" height="400" />
+  <img src="https://github.com/user-attachments/assets/e2b9b1f4-b142-41a0-8ddd-0b39f490afe9" height="400" />
+</p>
+
 
 ## 🎥 Demo Videos
 
 All feature demonstrations are available as video files in the [Google Drive Demo Folder](https://drive.google.com/drive/folders/1hGJpzq83Luf3ZU3eaJoWdDkaDJ_uAF5h?usp=drive_link):
-
-- **Landing Page**
-- **ChatBot Working & Call Button**
-- **Student/Faculty Login**
-
-> _No static screenshots are provided. Please watch the demo videos for a full walkthrough of the application's features._
 
 ---
 
@@ -32,15 +40,15 @@ All feature demonstrations are available as video files in the [Google Drive Dem
 
 ## ✨ Key Features
 
-- 🤖 **Interactive Chatbot**: 24/7 support for admissions, fees, scholarships, campus info, and more. Guides users through application and enquiry processes.
-- 📞 **Call Button**: Instantly connect with support or admissions via a floating call button on every page.
-- 🖼️ **Modern Sliders & Popups**: Engaging hero sliders, welcome popups, and user-type selection popups for a dynamic, interactive experience.
-- 📝 **Applications & Enquiries**: Students can easily submit applications and enquiries online, track their status, and receive timely updates.
-- 👀 **Faculty/Admin Dashboards**: Faculty and admins can view, manage, and respond to applications and enquiries in real time.
-- 📚 **Course Catalog**: Browse detailed undergraduate and postgraduate programs, with filters, highlights, and badges.
-- 📈 **Analytics Dashboard**: Real-time stats for admins and faculty, including application trends and student demographics.
-- 🔒 **Secure Authentication**: JWT-based login, role-based access, and secure data handling.
-- 📬 **Multi-Channel Support**: Contact via phone, email, WhatsApp, or instant enquiry forms.
+-  **Interactive Chatbot**: 24/7 support for admissions, fees, scholarships, campus info, and more. Guides users through application and enquiry processes.
+-  **Call Button**: Instantly connect with support or admissions via a floating call button on every page.
+-  **Modern Sliders & Popups**: Engaging hero sliders, welcome popups, and user-type selection popups for a dynamic, interactive experience.
+-  **Applications & Enquiries**: Students can easily submit applications and enquiries online, track their status, and receive timely updates.
+-  **Faculty/Admin Dashboards**: Faculty and admins can view, manage, and respond to applications and enquiries in real time.
+-  **Course Catalog**: Browse detailed undergraduate and postgraduate programs, with filters, highlights, and badges.
+-  **Analytics Dashboard**: Real-time stats for admins and faculty, including application trends and student demographics.
+-  **Secure Authentication**: JWT-based login, role-based access, and secure data handling.
+-  **Multi-Channel Support**: Contact via phone, email, WhatsApp, or instant enquiry forms.
 
 ## 🛠️ Tech Stack
 
@@ -209,7 +217,6 @@ eduworld/
 ## 📬 Contact & Community
 
 - **Email:** darshangowdaa223@gmail.com
-- **Phone/WhatsApp:** +91 9113504966
 - [Open an Issue](https://github.com/darshan-gowdaa/eduworld-fullstack/issues)
 - [My GitHub Profile](https://github.com/darshan-gowdaa)
 
