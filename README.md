@@ -25,6 +25,21 @@ _⚠️ Disclaimer: This project is not affiliated with any real educational ins
   <img src="https://github.com/user-attachments/assets/e2b9b1f4-b142-41a0-8ddd-0b39f490afe9" height="400" />
 </p>
 
+<h3>Login Pages</h3>
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/72b9427a-653f-445f-9c40-d99f4d4c00fa" />
+<img width="1919" height="833" alt="image" src="https://github.com/user-attachments/assets/c8d49087-688c-43e5-9055-d8ccfc17136b" />
+
+<h3>Dashboard & Forms</h3>
+<img width="1601" height="816" alt="image" src="https://github.com/user-attachments/assets/a131c09b-1d7e-4457-8b5a-cbc1232bc61d" />
+
+
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/f2f0d6a8-c2ba-4031-b15d-341734cdeef9" />
+<img width="1919" height="831" alt="image" src="https://github.com/user-attachments/assets/f63a3da4-706c-4b02-96b3-8ebce5f15a3c" />
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/55f6c2ab-c7b8-4d28-a38c-f41aeefb1121" />
+<img width="1739" height="903" alt="image" src="https://github.com/user-attachments/assets/d66859ba-2f5e-4a1c-b5e5-eed9c6ae4e6c" />
+
+
+
 
 ## 🎥 Demo Videos
 
