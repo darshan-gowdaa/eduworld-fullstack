@@ -29,12 +29,22 @@ app.use("/api/applications", applicationsRoutes);
 app.use("/api/enquiries", enquiriesRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err.stack);
+  }
+  res.status(500).json({
+    message: "Something went wrong on the server!",
+    error: process.env.NODE_ENV === "production" ? {} : err.message
+  });
+});
+
 // Export app for Vercel Serverless
 module.exports = app;
 
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
   });
 }
