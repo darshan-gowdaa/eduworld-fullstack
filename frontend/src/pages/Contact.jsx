@@ -129,17 +129,17 @@ const Contact = () => {
       icon: Phone,
       title: 'Phone',
       subtitle: 'Call us directly',
-      info: '+91 9113504966',
+      info: '+91 9876543210',
       subInfo: 'WhatsApp Available',
-      action: 'tel:+919113504966'
+      action: 'tel:+919876543210'
     },
     {
       icon: Mail,
       title: 'Email',
       subtitle: 'Send us a message',
-      info: 'darshangowdaa223@gmail.com',
+      info: 'dummy@email.com',
       subInfo: 'Response within 24hrs',
-      action: 'mailto:darshangowdaa223@gmail.com'
+      action: 'mailto:dummy@email.com'
     },
     {
       icon: MapPin,
@@ -458,7 +458,7 @@ const Contact = () => {
                     Need an immediate response? Our enrollment advisors are online and ready to guide you.
                   </p>
                   <div className="space-y-3">
-                    <a href="tel:+919113504966" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
+                    <a href="tel:+919876543210" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
                       <div className="bg-background/10 p-2 rounded-lg mr-4">
                         <Phone className="h-5 w-5 text-background" />
                       </div>
@@ -467,7 +467,7 @@ const Contact = () => {
                         <div className="text-xs text-background/70 mt-0.5">Available 9am - 6pm EST</div>
                       </div>
                     </a>
-                    <a href="https://wa.me/919113504966" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
+                    <a href="https://wa.me/919876543210" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
                       <div className="bg-background/10 p-2 rounded-lg mr-4">
                         <MessageCircle className="h-5 w-5 text-background" />
                       </div>

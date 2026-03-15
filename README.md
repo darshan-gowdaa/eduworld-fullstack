@@ -231,7 +231,8 @@ eduworld/
 
 ## 📬 Contact & Community
 
-- **Email:** darshangowdaa223@gmail.com
+- **Email:** dummy@email.com
+- **Phone/WhatsApp:** +91 9876543210
 - [Open an Issue](https://github.com/darshan-gowdaa/eduworld-fullstack/issues)
 - [My GitHub Profile](https://github.com/darshan-gowdaa)
 

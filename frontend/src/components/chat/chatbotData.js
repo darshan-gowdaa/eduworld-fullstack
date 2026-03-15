@@ -46,7 +46,7 @@ export const responses = {
     ],
   },
   contact: {
-    text: `📞 Get in Touch with EduWorld:\n\n📱 Phone: +91 9113504966 (WhatsApp available)\n📧 Email: darshangowdaa223@gmail.com\n📍 Address: Nagasandra, Bengaluru - 560073\n\n🕒 Office Hours:\n• Monday - Friday: 9:00 AM - 6:00 PM\n• Saturday: 10:00 AM - 4:00 PM\n• Sunday: Closed\n\n🚀 Quick Response: WhatsApp is the fastest way to reach us!`,
+    text: `📞 Get in Touch with EduWorld:\n\n📱 Phone: +91 9876543210 (WhatsApp available)\n📧 Email: dummy@email.com\n📍 Address: Nagasandra, Bengaluru - 560073\n\n🕒 Office Hours:\n• Monday - Friday: 9:00 AM - 6:00 PM\n• Saturday: 10:00 AM - 4:00 PM\n• Sunday: Closed\n\n🚀 Quick Response: WhatsApp is the fastest way to reach us!`,
     suggestions: [
       "WhatsApp contact",
       "Email support",
