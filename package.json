@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "setup": "concurrently \"npm i\" \"cd frontend && npm install\" \"cd backend && npm install\"",
-    "start": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm install && node server.js",
     "dev:backend": "cd backend && npx nodemon server.js",
     "dev:frontend": "cd frontend && npm run dev"
   },
