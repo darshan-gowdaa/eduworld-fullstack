@@ -16,6 +16,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Connect to MongoDB
+connectDB();
+
 app.get("/", (req, res) => {
   res.send("EduWorld API is running");
 });
