@@ -10,6 +10,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import HeroSection from '../components/common/HeroSection';
+import CallToAction from '../components/common/CallToAction';
 import { showToast } from '../components/ui/Toast';
 import api from '../utils/api';
 
