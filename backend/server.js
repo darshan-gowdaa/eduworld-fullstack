@@ -16,15 +16,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Connect to MongoDB
-connectDB();
-
 app.get("/", (req, res) => {
   res.send("EduWorld API is running");
 });
-
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // Use routers (uncomment after creating route files)
 app.use("/api/auth", authRoutes);
@@ -32,12 +26,12 @@ app.use("/api/applications", applicationsRoutes);
 app.use("/api/enquiries", enquiriesRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-// Anything that doesn't match the above, send back the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
+// Export app for Vercel Serverless
+module.exports = app;
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
