@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create a central axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || '',
 });
 
 // Automatically attach the token to every request if it exists
