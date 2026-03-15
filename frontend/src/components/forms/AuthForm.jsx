@@ -97,7 +97,7 @@ export default function AuthForm({
                 <label htmlFor={field.name} className="font-medium text-foreground">
                   {field.label}
                   {field.name === 'terms' && (
-                    <a href="#" className="text-primary hover:underline ml-1 ml-1">Terms and Conditions</a>
+                    <Link to="#" className="text-primary hover:underline ml-1">Terms and Conditions</Link>
                   )}
                 </label>
                 {errors[field.name] && (

@@ -14,18 +14,18 @@ const Footer = () => {
               Join us in shaping the future of education.
             </p>
             <div className="flex space-x-5">
-              <a href="#" className="p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
+              <Link to="#" className="p-2 -ml-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors font-medium">
                 <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
+              </Link>
+              <Link to="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
                 <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
+              </Link>
+              <Link to="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
+              </Link>
+              <Link to="#" className="p-2 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-full transition-colors">
                 <Linkedin className="h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -84,8 +84,8 @@ const Footer = () => {
             © {new Date().getFullYear()} EduWorld. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+            <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+            <Link to="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Terms</Link>
           </div>
         </div>
       </div>
