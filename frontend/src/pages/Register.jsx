@@ -78,23 +78,23 @@ const Register = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, 
   }
 
   return (
-    <div className="min-h-screen flex font-sans bg-zinc-950">
+    <div className="min-h-screen flex font-sans bg-background">
       {/* Left side - Form */}
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-md">
-          <Link to="/" className="inline-flex items-center text-sm font-medium text-zinc-400 hover:text-white mb-10 transition-colors">
+          <Link to="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground mb-10 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           
           <div className="mb-8">
-            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 ring-1 ring-primary/20">
-              <GraduationCap className="h-8 w-8 text-primary" />
+            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+              <GraduationCap className="h-7 w-7 text-primary" />
             </div>
-            <h2 className="text-4xl font-extrabold tracking-tight text-white mb-2 leading-tight">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">
               Create an account
             </h2>
-            <p className="text-zinc-400 text-lg">
+            <p className="text-muted-foreground">
               Join EduWorld and unlock your potential
             </p>
           </div>
@@ -127,9 +127,9 @@ const Register = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, 
                     <span className="px-2 bg-background text-muted-foreground">Or</span>
                   </div>
                 </div>
-                <p className="text-center text-sm text-zinc-500 mt-8">
+                <p className="text-center text-sm text-muted-foreground mt-8">
                   Already have an account?{' '}
-                  <Link to="/login" className="font-semibold text-primary hover:text-primary/80 transition-all">
+                  <Link to="/login" className="font-semibold text-primary hover:underline transition-all">
                     Sign in instead
                   </Link>
                 </p>
@@ -140,22 +140,26 @@ const Register = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, 
       </div>
 
       {/* Right side - Image/Decoration */}
-      <div className="hidden lg:flex flex-1 relative bg-zinc-950 overflow-hidden items-center justify-center">
-        {/* Deep Overlay Grid for Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-700/30 via-zinc-950/80 to-zinc-950 z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80')] bg-cover bg-center opacity-50 z-0" />
-        
-        <div className="relative z-20 max-w-2xl px-12 text-center text-white drop-shadow-2xl">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl rounded-full px-5 py-2.5 border border-white/20 mb-10 shadow-lg">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.5)]"></span>
-            <span className="text-sm font-semibold tracking-wide uppercase">Join 50,000+ Students</span>
+      <div className="hidden lg:flex flex-1 relative bg-zinc-950 items-center justify-center p-8">
+        <div className="relative w-full h-full rounded-[3rem] overflow-hidden shadow-2xl ring-1 ring-white/10">
+          {/* Deep Overlay Grid for Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-700/40 via-zinc-950/80 to-zinc-950 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80')] bg-cover bg-center opacity-60 z-0 scale-105" />
+          
+          <div className="absolute inset-0 backdrop-blur-[2px] z-5" />
+
+          <div className="relative z-20 h-full flex flex-col items-center justify-center px-12 text-center text-white drop-shadow-2xl">
+            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl rounded-full px-5 py-2.5 border border-white/20 mb-10 shadow-lg">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.5)]"></span>
+              <span className="text-sm font-semibold tracking-wide uppercase">Join 50,000+ Students</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 text-balance leading-[1.1]">
+              Discover a community of <span className="text-blue-400">innovators</span>.
+            </h1>
+            <p className="text-xl md:text-2xl text-zinc-300 text-balance leading-relaxed mx-auto max-w-xl font-medium opacity-90">
+              Register today to gain access to exclusive resources, world-class programs, and a network of professionals.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 text-balance leading-[1.1]">
-            Discover a community of <span className="text-blue-400">innovators</span>.
-          </h1>
-          <p className="text-xl md:text-2xl text-zinc-300 text-balance leading-relaxed mx-auto max-w-xl font-medium opacity-90">
-            Register today to gain access to exclusive resources, world-class programs, and a network of professionals.
-          </p>
         </div>
       </div>
 

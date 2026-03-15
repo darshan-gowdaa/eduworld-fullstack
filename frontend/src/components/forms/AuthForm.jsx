@@ -53,13 +53,13 @@ export default function AuthForm({
     <form className="space-y-5" onSubmit={handleSubmit(handleFormSubmit)}>
       {selectedUserType && (
         <div className="text-center mb-6">
-          <div className="inline-flex items-center space-x-2 bg-zinc-900 rounded-full px-4 py-1.5 border border-zinc-800 shadow-inner">
+          <div className="inline-flex items-center space-x-2 bg-secondary rounded-full px-4 py-1.5 border border-border">
             {selectedUserType === 'student' ? (
               <User className="h-4 w-4 text-primary" />
             ) : (
               <GraduationCap className="h-4 w-4 text-primary" />
             )}
-            <span className="text-sm font-semibold text-zinc-100 capitalize">
+            <span className="text-sm font-medium text-foreground capitalize">
               {selectedUserType} {mode === 'login' ? 'Login' : 'Registration'}
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function AuthForm({
                 />
               </div>
               <div className="ml-3 text-sm">
-                <label htmlFor={field.name} className="font-medium text-zinc-200">
+                <label htmlFor={field.name} className="font-medium text-foreground">
                   {field.label}
                   {field.name === 'terms' && (
                     <Link to="#" className="text-primary hover:underline ml-1">Terms and Conditions</Link>
@@ -117,7 +117,7 @@ export default function AuthForm({
 
         return (
           <div key={field.name} className="space-y-1.5">
-            <label htmlFor={field.name} className="block text-sm font-medium text-zinc-200">
+            <label htmlFor={field.name} className="block text-sm font-medium text-foreground">
               {field.label}
             </label>
             <div className="relative">
@@ -131,7 +131,7 @@ export default function AuthForm({
                   pattern: field.pattern && { value: field.pattern, message: field.patternMessage },
                   validate: field.name === 'confirmPassword' ? value => value === password || 'Passwords do not match' : undefined
                 })}
-                className={`${errors[field.name] ? 'border-destructive focus-visible:ring-destructive/20' : 'border-zinc-800 focus-visible:border-primary/50'} ${isPasswordField ? 'pr-10' : ''} bg-zinc-900/50 text-white placeholder:text-zinc-500 rounded-xl h-12`}
+                className={`${errors[field.name] ? 'border-destructive focus-visible:ring-destructive/20' : ''} ${isPasswordField ? 'pr-10' : ''}`}
                 placeholder={field.placeholder || (field.name === 'confirmPassword' ? 'Confirm your password' : `Enter your ${field.label.toLowerCase()}`)}
               />
               
@@ -180,8 +180,8 @@ export default function AuthForm({
       </div>
 
       {linkText && linkTo && (
-        <p className="text-center text-sm text-zinc-400 mt-6">
-          <Link to={linkTo} className="font-semibold text-primary hover:text-primary/80 transition-all">
+        <p className="text-center text-sm text-muted-foreground mt-4">
+          <Link to={linkTo} className="font-medium text-primary hover:underline transition-all">
             {linkText}
           </Link>
         </p>
