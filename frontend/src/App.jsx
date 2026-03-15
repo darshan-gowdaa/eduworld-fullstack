@@ -9,6 +9,7 @@ import Footer from './components/common/Footer';
 import CallButton from './components/common/CallButton';
 import ChatBot from './components/chat/ChatBot';
 import Toast from './components/ui/Toast';
+import PrivateRoute from './utils/PrivateRoute';
 
 // Public Pages
 import Home from './pages/Home';
@@ -95,14 +96,38 @@ function AppContent() {
             } />
             
             {/* Student Routes */}
-            <Route path="/student/dashboard" element={<PageTransition><StudentDashboard /></PageTransition>} />
-            <Route path="/student/apply" element={<PageTransition><StudentApply /></PageTransition>} />
-            <Route path="/student/status" element={<PageTransition><StudentStatus /></PageTransition>} />
+            <Route path="/student/dashboard" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['student']}>
+                <PageTransition><StudentDashboard /></PageTransition>
+              </PrivateRoute>
+            } />
+            <Route path="/student/apply" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['student']}>
+                <PageTransition><StudentApply /></PageTransition>
+              </PrivateRoute>
+            } />
+            <Route path="/student/status" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['student']}>
+                <PageTransition><StudentStatus /></PageTransition>
+              </PrivateRoute>
+            } />
             
             {/* Faculty Routes */}
-            <Route path="/faculty/dashboard" element={<PageTransition><FacultyDashboard /></PageTransition>} />
-            <Route path="/faculty/applications" element={<PageTransition><FacultyApplications /></PageTransition>} />
-            <Route path="/faculty/enquiries" element={<PageTransition><FacultyEnquiries /></PageTransition>} />
+            <Route path="/faculty/dashboard" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['faculty']}>
+                <PageTransition><FacultyDashboard /></PageTransition>
+              </PrivateRoute>
+            } />
+            <Route path="/faculty/applications" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['faculty']}>
+                <PageTransition><FacultyApplications /></PageTransition>
+              </PrivateRoute>
+            } />
+            <Route path="/faculty/enquiries" element={
+              <PrivateRoute isAuthenticated={isAuthenticated} role={userRole} allowedRoles={['faculty']}>
+                <PageTransition><FacultyEnquiries /></PageTransition>
+              </PrivateRoute>
+            } />
           </Routes>
         </AnimatePresence>
       </main>

@@ -9,9 +9,19 @@ const applicationsRoutes = require("./routes/applicationsRoutes");
 const enquiriesRoutes = require("./routes/enquiriesRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
 dotenv.config();
 
 const app = express();
+
+app.use(helmet());
+app.use('/api/auth', rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 20,
+  message: { message: 'Too many requests, please try again later.' },
+}));
 
 app.use(cors());
 app.use(bodyParser.json());
