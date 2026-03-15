@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Phone, MessageCircle, X, Mail, MapPin, Clock, User } from 'lucide-react';
+import { Phone, MessageCircle, X, Mail, MapPin, Clock, Headset } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CallButton = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button after page loads
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 1000);
     return () => clearTimeout(timer);
@@ -26,116 +26,108 @@ const CallButton = () => {
     setShowPopup(false);
   };
 
-  // Close popup when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showPopup && !event.target.closest('.contact-popup') && !event.target.closest('.contact-button')) {
         setShowPopup(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showPopup]);
 
   return (
     <>
-      {/* Floating Contact Button */}
-      <div className={`fixed bottom-28 right-6 z-50 transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-        <div className="relative">
-          {/* Pulse animation ring - keep static */}
-          <div className={`absolute inset-0 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full ${showPopup ? 'opacity-0' : 'opacity-75'}`}></div>
-          
-          <button
-            onClick={() => setShowPopup(!showPopup)}
-            className="contact-button relative bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95"
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="fixed bottom-24 right-6 z-40"
           >
-            <div className={`transition-transform duration-300 ${showPopup ? 'rotate-45' : 'rotate-0'}`}>
-              {showPopup ? <X className="h-6 w-6" /> : <Phone className="h-6 w-6" />}
+            <div className="relative">
+              {!showPopup && (
+                <div className="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+              )}
+              
+              <button
+                onClick={() => setShowPopup(!showPopup)}
+                className="contact-button relative bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-3.5 shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center border border-primary-foreground/10"
+              >
+                <div className={`transition-transform duration-300 ${showPopup ? 'rotate-90' : 'rotate-0'}`}>
+                  {showPopup ? <X className="h-5 w-5" /> : <Headset className="h-5 w-5" />}
+                </div>
+              </button>
+
+              {!showPopup && (
+                <div className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold border-2 border-background">
+                  1
+                </div>
+              )}
             </div>
-          </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          {/* Notification badge - keep static */}
-          <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center">
-            <span className="font-bold">!</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Options Popup */}
-      <div className={`fixed bottom-20 right-6 z-40 transition-all duration-300 ${showPopup ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-95 pointer-events-none'}`}>
-        <div className="contact-popup bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 p-6 min-w-80 max-w-sm">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full p-2 animate-pulse">
-                <User className="h-5 w-5 text-white" />
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-40 right-6 z-40"
+          >
+            <div className="contact-popup bg-background/95 backdrop-blur-xl rounded-2xl shadow-xl border border-border p-5 w-72">
+              <div className="mb-4">
+                <h3 className="text-base font-semibold text-foreground tracking-tight">Need assistance?</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">We typically respond within 15 minutes.</p>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-800">Get in Touch</h3>
-                <p className="text-sm text-gray-500">We're here to help!</p>
+              
+              <div className="space-y-2">
+                <button
+                  onClick={handleCall}
+                  className="w-full flex items-center space-x-3 p-3 bg-secondary hover:bg-secondary/80 text-foreground border border-border rounded-xl transition-all"
+                >
+                  <div className="bg-background rounded-full p-2 text-foreground">
+                    <Phone className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <span className="font-semibold text-sm block">Call Support</span>
+                    <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">Instant</span>
+                  </div>
+                </button>
+                
+                <button
+                  onClick={handleWhatsApp}
+                  className="w-full flex items-center space-x-3 p-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/20 text-[#25D366] rounded-xl transition-all dark:text-[#25D366] dark:border-[#25D366]/30 dark:bg-[#25D366]/10 dark:hover:bg-[#25D366]/20"
+                >
+                  <div className="bg-background rounded-full p-2 text-[#25D366]">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <span className="font-semibold text-sm block">WhatsApp</span>
+                    <span className="text-[10px] opacity-80 font-medium uppercase tracking-wider">Fast</span>
+                  </div>
+                </button>
+                
+                <button
+                  onClick={handleEmail}
+                  className="w-full flex items-center space-x-3 p-3 bg-secondary hover:bg-secondary/80 text-foreground border border-border rounded-xl transition-all"
+                >
+                  <div className="bg-background rounded-full p-2 text-foreground">
+                    <Mail className="h-4 w-4" />
+                  </div>
+                  <div className="text-left">
+                    <span className="font-semibold text-sm block">Email Us</span>
+                    <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">Detailed</span>
+                  </div>
+                </button>
               </div>
             </div>
-          </div>
-          
-          {/* Contact Options */}
-          <div className="space-y-3 mb-6">
-            <button
-              onClick={handleCall}
-              className="w-full group flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              <div className="bg-white/20 rounded-full p-2 group-hover:bg-white/30 transition-colors animate-bounce">
-                <Phone className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <span className="font-semibold block">Call Now</span>
-                <span className="text-sm opacity-90">Instant support</span>
-              </div>
-            </button>
-            
-            <button
-              onClick={handleWhatsApp}
-              className="w-full group flex items-center space-x-4 p-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              <div className="bg-white/20 rounded-full p-2 group-hover:bg-white/30 transition-colors animate-bounce">
-                <MessageCircle className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <span className="font-semibold block">WhatsApp</span>
-                <span className="text-sm opacity-90">Quick chat</span>
-              </div>
-            </button>
-            
-            <button
-              onClick={handleEmail}
-              className="w-full group flex items-center space-x-4 p-4 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              <div className="bg-white/20 rounded-full p-2 group-hover:bg-white/30 transition-colors animate-bounce">
-                <Mail className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <span className="font-semibold block">Email Us</span>
-                <span className="text-sm opacity-90">Detailed inquiry</span>
-              </div>
-            </button>
-          </div>
-
-          {/* Quick Response Promise */}
-          <div className=" p-3 bg-gradient-to-r from-emerald-50 to-cyan-50 rounded-lg border border-emerald-200 animate-pulse">
-            <p className="text-sm text-emerald-800 font-medium text-center">
-              ⚡ Quick Response Guaranteed
-            </p>
-            <p className="text-xs text-emerald-600 text-center mt-1">
-              We typically respond within 15 minutes
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Backdrop */}
-      {showPopup && (
-        <div className="fixed inset-0 bg-black/10 backdrop-blur-sm z-30 transition-opacity duration-300" />
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

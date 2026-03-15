@@ -1,95 +1,190 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 const HeroSection = ({
   title,
   subtitle,
   description,
   buttons = [],
-  gradient = 'bg-gradient-to-br from-blue-900 via-blue-700 to-purple-800',
+  gradient = 'bg-background border-b border-border',
   backgroundElements = null,
   scrollIndicator = null,
   className = '',
   style = {},
   children
 }) => {
+  const containerRef = useRef(null);
+  
+  // Parallax Effect
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Cursor following spotlight (Interactive element)
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 200 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    cursorX.set(e.clientX - rect.left);
+    cursorY.set(e.clientY - rect.top);
+  };
+
+  // Staggered Text Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0, filter: 'blur(10px)' },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      filter: 'blur(0px)',
+      transition: { type: 'spring', stiffness: 300, damping: 24 }
+    }
+  };
+
   return (
-    <section className={`relative ${gradient} text-white py-32 overflow-hidden ${className}`} style={style}>
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+    <section 
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className={`relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden ${gradient} ${className}`} 
+      style={style}
+    >
+      {/* Interactive Spotlight */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 md:opacity-100 mix-blend-soft-light"
+        style={{
+          background: `radial-gradient(600px circle at ${cursorXSpring}px ${cursorYSpring}px, rgba(99, 102, 241, 0.15), transparent 40%)`,
+        }}
+      />
+
+      {/* Animated Floating Particles Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-center">
         {backgroundElements || (
           <>
-            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-            <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{animationDelay: '4s'}}></div>
+            <motion.div 
+              animate={{ 
+                y: [0, -30, 0], 
+                rotate: [0, 5, 0],
+                scale: [1, 1.05, 1] 
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] opacity-70 -z-10"
+            />
+            <motion.div 
+              animate={{ 
+                y: [0, 40, 0], 
+                x: [0, -20, 0] 
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute top-20 right-[10%] w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-[80px] opacity-50 -z-10"
+            />
           </>
         )}
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div className="animate-fade-in-up">
-          {title && (
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-              {title}
-            </h1>
-          )}
+      
+      <motion.div 
+        style={{ y, opacity }}
+        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 flex flex-col items-center"
+      >
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="w-full flex flex-col items-center"
+        >
           {subtitle && (
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-blue-100">
+            <motion.div variants={itemVariants} className="inline-block px-4 py-1.5 mb-6 rounded-full bg-secondary text-foreground text-sm font-semibold border border-border shadow-sm">
               {subtitle}
-            </h2>
+            </motion.div>
           )}
+          
+          {title && (
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-foreground text-balance leading-tight">
+              {title}
+            </motion.h1>
+          )}
+          
           {description && (
-            <p className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-8 leading-relaxed">
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
               {description}
-            </p>
+            </motion.p>
           )}
+          
           {buttons.length > 0 && (
-            <div className="flex justify-center gap-4 mb-12 flex-wrap">
-              {buttons.map((btn, idx) =>
-                btn.href ? (
-                  btn.href.startsWith('/') ? (
-                    <Link
-                      key={idx}
-                      to={btn.href}
-                      className={btn.className || 'bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg'}
-                    >
-                      {btn.icon && <span className="inline mr-2">{btn.icon}</span>}
-                      {btn.text}
-                    </Link>
-                  ) : (
-                    <a
-                      key={idx}
-                      href={btn.href}
-                      className={btn.className || 'bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg'}
-                      target="_blank" rel="noopener noreferrer"
-                    >
-                      {btn.icon && <span className="inline mr-2">{btn.icon}</span>}
-                      {btn.text}
-                    </a>
-                  )
-                ) : (
-                  <button
-                    key={idx}
-                    className={btn.className || 'bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg'}
-                    onClick={btn.onClick}
-                  >
-                    {btn.icon && <span className="inline mr-2">{btn.icon}</span>}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-4 w-full">
+              {buttons.map((btn, idx) => {
+                const isPrimary = idx === 0;
+                
+                const baseClasses = "inline-flex items-center justify-center px-8 py-3.5 rounded-full font-medium text-base transition-all w-full sm:w-auto shadow-sm";
+                const primaryClasses = "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md group";
+                const secondaryClasses = "bg-background text-foreground border border-input hover:bg-accent hover:text-accent-foreground group";
+                const btnClasses = `${baseClasses} ${isPrimary ? primaryClasses : secondaryClasses} ${btn.className || ''}`;
+                
+                // Add a hover scale effect to buttons using Framer Motion
+                const ButtonContent = () => (
+                  <>
                     {btn.text}
-                  </button>
-                )
-              )}
-            </div>
+                    {btn.icon && <span className="ml-2 group-hover:translate-x-1 transition-transform">{btn.icon}</span>}
+                  </>
+                );
+
+                if (btn.href) {
+                  return btn.href.startsWith('/') ? (
+                    <motion.div key={idx} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <Link to={btn.href} className={btnClasses}>
+                        <ButtonContent />
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <motion.div key={idx} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <a href={btn.href} className={btnClasses} target="_blank" rel="noopener noreferrer">
+                        <ButtonContent />
+                      </a>
+                    </motion.div>
+                  );
+                }
+                return (
+                  <motion.button key={idx} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={btnClasses} onClick={btn.onClick}>
+                    <ButtonContent />
+                  </motion.button>
+                );
+              })}
+            </motion.div>
           )}
           {children}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+      
       {/* Scroll Indicator */}
-      {scrollIndicator || (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          {/* Example: <FaChevronDown className="text-white text-2xl opacity-70" /> */}
-        </div>
+      {scrollIndicator && (
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ delay: 1 }}
+        >
+          {scrollIndicator}
+        </motion.div>
       )}
     </section>
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import AuthForm from '../components/forms/AuthForm';
 import UserTypePopup from '../components/forms/UserTypePopup';
-import { CheckCircle, GraduationCap } from 'lucide-react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { CheckCircle, GraduationCap, ArrowLeft } from 'lucide-react';
+import api from '../utils/api';
+import { Link, useNavigate } from 'react-router-dom';
 import { showToast } from '../components/ui/Toast';
 
 const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, setUserName }) => {
@@ -12,31 +12,36 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
   const [success, setSuccess] = useState('');
   const [showUserTypePopup, setShowUserTypePopup] = useState(false);
   const [selectedUserType, setSelectedUserType] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (data) => {
     setIsLoading(true);
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', data);
+      const res = await api.post('/api/auth/login', data);
       localStorage.setItem('token', res.data.token);
       setIsAuthenticated(true);
       setUserRole(res.data.user.role);
       setUserName(res.data.user.name || '');
       localStorage.setItem('userRole', res.data.user.role);
       localStorage.setItem('userName', res.data.user.name || '');
-      setSuccess(`Successfully logged in as ${res.data.user.name || 'User'}!`);
-      showToast.success(`Successfully logged in as ${res.data.user.name || 'User'}!`);
+      
+      const successMsg = `Successfully logged in as ${res.data.user.name || 'User'}!`;
+      setSuccess(successMsg);
+      showToast.success(successMsg);
+      
       setTimeout(() => {
         if (res.data.user.role === 'student') {
-          window.location.href = '/student/dashboard';
+          navigate('/student/dashboard');
         } else {
-          window.location.href = '/faculty/dashboard';
+          navigate('/faculty/dashboard');
         }
       }, 1500);
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
-      showToast.error(err.response?.data?.message || 'Login failed. Please try again.');
+      const errMsg = err.response?.data?.message || 'Login failed. Please try again.';
+      setError(errMsg);
+      showToast.error(errMsg);
     } finally {
       setIsLoading(false);
     }
@@ -53,61 +58,49 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
 
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1986&q=80')` }}
-        />
-        <div className="relative z-10 flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <div className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl py-8 px-4 sm:px-10 text-center">
-              <CheckCircle className="mx-auto h-16 w-16 text-green-400 mb-4" />
-              <h2 className="text-2xl font-bold text-white mb-2">Welcome to University Portal!</h2>
-              <p className="text-white/80 mb-6">
-                You are logged in as <span className="font-semibold text-blue-300 capitalize">{userRole}</span>
-              </p>
-            </div>
+      <div className="min-h-screen flex items-center justify-center bg-zinc-50 p-4 font-sans">
+        <div className="max-w-md w-full bg-white rounded-[2rem] p-10 text-center shadow-xl border border-zinc-100">
+          <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="h-10 w-10" />
           </div>
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-950 mb-3">Welcome Back!</h2>
+          <p className="text-zinc-600 mb-8">
+            You are currently logged in as a <span className="font-semibold text-zinc-900 capitalize">{userRole}</span>.
+          </p>
+          <button 
+            onClick={() => navigate(userRole === 'student' ? '/student/dashboard' : '/faculty/dashboard')}
+            className="w-full bg-zinc-950 text-white rounded-xl py-3.5 font-medium hover:bg-zinc-800 transition-colors shadow-md"
+          >
+            Go to Dashboard
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `linear-gradient(rgba(30, 58, 138, 0.4), rgba(30, 64, 175, 0.6)), url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1986&q=80')` }}
-      />
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 text-white/10 text-6xl animate-pulse">📚</div>
-        <div className="absolute top-40 right-20 text-white/10 text-4xl animate-pulse delay-1000">🎓</div>
-        <div className="absolute bottom-40 left-20 text-white/10 text-5xl animate-pulse delay-500">🏛️</div>
-        <div className="absolute top-60 left-1/3 text-white/10 text-3xl animate-pulse delay-700">📖</div>
-        <div className="absolute bottom-60 right-1/3 text-white/10 text-4xl animate-pulse delay-300">🔬</div>
-      </div>
-      <div className="relative z-10 flex flex-col justify-center min-h-screen py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="flex justify-center mb-6">
-            <Link to="/" className="relative flex items-center justify-center group">
-              {/* Soft purple glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-radial from-purple-200/60 via-transparent to-transparent blur-2xl opacity-80 w-14 h-14 -z-10" />
-              {/* Blue-purple gradient circle */}
-              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-500 shadow-lg">
-                <GraduationCap className="h-7 w-7 text-white" />
-              </div>
-            </Link>
+    <div className="min-h-screen flex font-sans bg-background">
+      {/* Left side - Form */}
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
+        <div className="mx-auto w-full max-w-sm lg:max-w-md">
+          <Link to="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground mb-10 transition-colors">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
+          
+          <div className="mb-8">
+            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+              <GraduationCap className="h-7 w-7 text-primary" />
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">
+              Welcome back
+            </h2>
+            <p className="text-muted-foreground">
+              Sign in to your EduWorld account to continue
+            </p>
           </div>
-          <h2 className="text-center text-4xl font-bold text-white mb-2 drop-shadow-lg">
-            University Portal
-          </h2>
-          <h3 className="text-center text-xl font-semibold text-blue-100 mb-2">
-            Sign in to your account
-          </h3>
-          <p className="text-center text-sm text-blue-200">
-            Access your academic dashboard
-          </p>
-        </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl py-8 px-4 sm:px-10">
+
+          <div className="mt-8">
             {selectedUserType ? (
               <AuthForm
                 mode="login"
@@ -116,7 +109,7 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
                 isLoading={isLoading}
                 error={error}
                 success={success}
-                submitText="Sign in to University Portal"
+                submitText="Sign In"
                 linkText="Don't have an account? Register"
                 linkTo="/register"
               />
@@ -124,13 +117,22 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
               <div className="text-center">
                 <button
                   onClick={handleLoginClick}
-                  className="w-full group relative flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600/80 to-blue-700/80 backdrop-blur-sm hover:from-blue-700/90 hover:to-blue-800/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 transform hover:scale-105 shadow-xl"
+                  className="w-full py-3.5 px-4 border border-transparent text-sm font-medium rounded-xl text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all shadow-sm mb-6"
                 >
-                  Sign in to University Portal
+                  Select Account Type to Sign In
                 </button>
-                <p className="text-center text-sm text-blue-200 mt-4">
-                  <Link to="/register" className="font-medium text-blue-300 hover:text-blue-200 transition duration-200">
-                    Don't have an account? Register
+                <div className="relative mt-8">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-border" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-background text-muted-foreground">Or</span>
+                  </div>
+                </div>
+                <p className="text-center text-sm text-muted-foreground mt-8">
+                  Don't have an account?{' '}
+                  <Link to="/register" className="font-semibold text-primary hover:underline transition-all">
+                    Register now
                   </Link>
                 </p>
               </div>
@@ -139,7 +141,25 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
         </div>
       </div>
 
-      {/* User Type Selection Popup */}
+      {/* Right side - Image/Decoration */}
+      <div className="hidden lg:flex flex-1 relative bg-zinc-950 overflow-hidden items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-zinc-950 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay" />
+        
+        <div className="relative z-10 max-w-2xl px-12 text-center text-white">
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20 mb-8">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-sm font-medium">Admissions Open 2024</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
+            Your journey to excellence starts here.
+          </h1>
+          <p className="text-lg md:text-xl text-zinc-300 text-balance leading-relaxed mx-auto max-w-xl">
+            Access world-class education, connect with expert faculty, and join a global community of learners shaping the future.
+          </p>
+        </div>
+      </div>
+
       <UserTypePopup
         isOpen={showUserTypePopup}
         onClose={() => setShowUserTypePopup(false)}

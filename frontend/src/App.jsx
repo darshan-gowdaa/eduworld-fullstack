@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './App.css';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from './components/theme-provider';
 
 // Common Components
 import Header from './components/common/Header';
@@ -27,10 +28,23 @@ import FacultyDashboard from './pages/faculty/Dashboard';
 import FacultyApplications from './pages/faculty/Applications';
 import FacultyEnquiries from './pages/faculty/Enquiries';
 
-function App() {
+const PageTransition = ({ children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, filter: 'blur(5px)' }}
+    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    className="w-full h-full"
+  >
+    {children}
+  </motion.div>
+);
+
+function AppContent() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('token'));
   const [userRole, setUserRole] = useState(() => localStorage.getItem('userRole') || '');
   const [userName, setUserName] = useState(() => localStorage.getItem('userName') || '');
+  const location = useLocation();
 
   // Keep localStorage in sync with state
   useEffect(() => {
@@ -40,7 +54,7 @@ function App() {
     }
   }, [isAuthenticated, userRole, userName]);
 
-  // Helper for logout (can be passed to Header if needed)
+  // Helper for logout
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUserRole('');
@@ -50,47 +64,64 @@ function App() {
     localStorage.removeItem('userName');
   };
 
-  // Custom wrapper to use hooks outside Router
-  function AppContent() {
-    const location = useLocation();
-    const isHome = location.pathname === '/';
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header isAuthenticated={isAuthenticated} userRole={userRole} userName={userName} onLogout={handleLogout} pathname={location.pathname} />
-        <main className={`flex-1${isHome ? '' : ' pt-16'}`}>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userRole={userRole} setUserRole={setUserRole} userName={userName} setUserName={setUserName} />} />
-            <Route path="/register" element={<Register isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userRole={userRole} setUserRole={setUserRole} userName={userName} setUserName={setUserName} />} />
-            
-            {/* Student Routes */}
-            <Route path="/student/dashboard" element={<StudentDashboard />} />
-            <Route path="/student/apply" element={<StudentApply />} />
-            <Route path="/student/status" element={<StudentStatus />} />
-            
-            {/* Faculty Routes */}
-            <Route path="/faculty/dashboard" element={<FacultyDashboard />} />
-            <Route path="/faculty/applications" element={<FacultyApplications />} />
-            <Route path="/faculty/enquiries" element={<FacultyEnquiries />} />
-          </Routes>
-        </main>
-
-        <Footer />
-        <CallButton />
-        <ChatBot />
-        <Toast />
-      </div>
-    );
-  }
+  const isHome = location.pathname === '/';
 
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans overflow-x-hidden">
+      <Header 
+        isAuthenticated={isAuthenticated} 
+        userRole={userRole} 
+        userName={userName} 
+        onLogout={handleLogout} 
+        pathname={location.pathname} 
+      />
+      <main className={`flex-1 relative ${isHome ? '' : 'pt-20'}`}>
+        <AnimatePresence mode="wait" initial={false}>
+          <Routes location={location} key={location.pathname}>
+            {/* Public Routes */}
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+            <Route path="/courses" element={<PageTransition><Courses /></PageTransition>} />
+            <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+            <Route path="/login" element={
+              <PageTransition>
+                <Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userRole={userRole} setUserRole={setUserRole} userName={userName} setUserName={setUserName} />
+              </PageTransition>
+            } />
+            <Route path="/register" element={
+              <PageTransition>
+                <Register isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} userRole={userRole} setUserRole={setUserRole} userName={userName} setUserName={setUserName} />
+              </PageTransition>
+            } />
+            
+            {/* Student Routes */}
+            <Route path="/student/dashboard" element={<PageTransition><StudentDashboard /></PageTransition>} />
+            <Route path="/student/apply" element={<PageTransition><StudentApply /></PageTransition>} />
+            <Route path="/student/status" element={<PageTransition><StudentStatus /></PageTransition>} />
+            
+            {/* Faculty Routes */}
+            <Route path="/faculty/dashboard" element={<PageTransition><FacultyDashboard /></PageTransition>} />
+            <Route path="/faculty/applications" element={<PageTransition><FacultyApplications /></PageTransition>} />
+            <Route path="/faculty/enquiries" element={<PageTransition><FacultyEnquiries /></PageTransition>} />
+          </Routes>
+        </AnimatePresence>
+      </main>
+
+      <Footer />
+      <CallButton />
+      <ChatBot />
+      <Toast />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="light" storageKey="eduworld-theme">
+      <Router>
+        <AppContent />
+      </Router>
+    </ThemeProvider>
   );
 }
 

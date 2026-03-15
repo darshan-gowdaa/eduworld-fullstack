@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, HelpCircle, GraduationCap, Users, Eye, Inbox } from 'lucide-react';
-import axios from 'axios';
+import { FileText, HelpCircle, GraduationCap, Users, Eye, Inbox, ArrowRight } from 'lucide-react';
+import api from '../../utils/api';
+import { motion } from 'framer-motion';
 
 const FacultyDashboard = () => {
   const [userName, setUserName] = useState('');
@@ -22,20 +23,14 @@ const FacultyDashboard = () => {
           return;
         }
 
-        // Fetch user data and stats in parallel
         const [userResponse, statsResponse] = await Promise.all([
-          axios.get('http://localhost:5000/api/auth/me', {
-            headers: { Authorization: `Bearer ${token}` }
-          }),
-          axios.get('http://localhost:5000/api/dashboard/stats', {
-            headers: { Authorization: `Bearer ${token}` }
-          })
+          api.get('/api/auth/me'),
+          api.get('/api/dashboard/stats')
         ]);
 
         setUserName(userResponse.data.user.name);
         setStats(statsResponse.data);
       } catch (err) {
-        // Fallback to localStorage if API fails
         const fallbackName = localStorage.getItem('userName');
         if (fallbackName) {
           setUserName(fallbackName);
@@ -49,68 +44,99 @@ const FacultyDashboard = () => {
   }, []);
 
   const statsData = [
-    { label: 'Applications', value: stats.applications, icon: <FileText className="h-8 w-8 text-blue-600" /> },
-    { label: 'Enquiries', value: stats.enquiries, icon: <HelpCircle className="h-8 w-8 text-yellow-500" /> },
-    { label: 'Students', value: stats.students, icon: <GraduationCap className="h-8 w-8 text-green-600" /> },
-    { label: 'Faculty', value: stats.faculty, icon: <Users className="h-8 w-8 text-purple-600" /> }
+    { label: 'Applications', value: stats.applications, icon: <FileText className="h-6 w-6 text-primary" />, color: "bg-primary/10" },
+    { label: 'Enquiries', value: stats.enquiries, icon: <HelpCircle className="h-6 w-6 text-yellow-500" />, color: "bg-yellow-500/10" },
+    { label: 'Students', value: stats.students, icon: <GraduationCap className="h-6 w-6 text-emerald-500" />, color: "bg-emerald-500/10" },
+    { label: 'Faculty', value: stats.faculty, icon: <Users className="h-6 w-6 text-purple-500" />, color: "bg-purple-500/10" }
   ];
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <h1 className="text-2xl font-semibold text-gray-600">Loading...</h1>
-          </div>
+      <div className="min-h-screen bg-background flex justify-center items-center">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-4"></div>
+          <p className="text-muted-foreground font-medium text-sm">Loading your dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight drop-shadow-sm">Welcome, {userName}!</h1>
-          <p className="text-lg text-gray-600 mb-8">
-            This is your faculty dashboard. Here you can view applications, enquiries, and manage students.
-          </p>
-
-          {/* Modern Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-10 justify-center items-center">
-            <Link
-              to="/faculty/applications"
-              className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-bold text-lg shadow-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 hover:scale-105"
-            >
-              <Eye className="h-6 w-6 group-hover:scale-110 transition-transform" />
-              View Applications
-            </Link>
-            <Link
-              to="/faculty/enquiries"
-              className="group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-2xl font-bold text-lg shadow-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 hover:scale-105"
-            >
-              <Inbox className="h-6 w-6 group-hover:scale-110 transition-transform" />
-              View Enquiries
-            </Link>
+    <div className="min-h-screen bg-background pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-10">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="bg-primary/10 p-2.5 rounded-xl border border-primary/20">
+              <Users className="h-6 w-6 text-primary" />
+            </div>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+              Welcome back, {userName || 'Faculty'}
+            </h1>
           </div>
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            This is your faculty administration dashboard. Review incoming student applications and monitor general platform enquiries.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            {statsData.map((stat) => (
-              <div key={stat.label} className="bg-white rounded-2xl shadow-xl p-8 flex items-center space-x-6 hover:shadow-2xl transition-shadow duration-300 border border-gray-100">
-                {stat.icon}
-                <div>
-                  <div className="text-3xl font-extrabold text-gray-900 drop-shadow-sm">{stat.value}</div>
-                  <div className="text-gray-600 font-medium text-lg">{stat.label}</div>
+        <div className="flex flex-col sm:flex-row gap-4 mb-10">
+          <Link
+            to="/faculty/applications"
+            className="group flex-1 flex items-center justify-between p-6 bg-card border border-border hover:border-primary/50 text-foreground rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <div className="bg-primary/10 p-3 rounded-xl">
+                <Eye className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">View Applications</h3>
+                <p className="text-sm text-muted-foreground">Manage incoming student applications</p>
+              </div>
+            </div>
+            <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+          </Link>
+
+          <Link
+            to="/faculty/enquiries"
+            className="group flex-1 flex items-center justify-between p-6 bg-card border border-border hover:border-yellow-500/50 text-foreground rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <div className="bg-yellow-500/10 p-3 rounded-xl">
+                <Inbox className="h-6 w-6 text-yellow-500 group-hover:scale-110 transition-transform" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">View Enquiries</h3>
+                <p className="text-sm text-muted-foreground">Respond to prospective students</p>
+              </div>
+            </div>
+            <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-yellow-500 group-hover:translate-x-1 transition-all" />
+          </Link>
+        </div>
+
+        <h2 className="text-xl font-bold text-foreground mb-6">Platform Statistics</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {statsData.map((stat, index) => (
+            <motion.div 
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-card rounded-2xl p-6 border border-border shadow-sm flex flex-col justify-between h-full"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className={`p-3 rounded-xl ${stat.color}`}>
+                  {stat.icon}
                 </div>
               </div>
-            ))}
-          </div>
-
+              <div>
+                <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+                <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default FacultyDashboard; 
+export default FacultyDashboard;

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { User, GraduationCap, BookOpen, CheckCircle, ArrowRight, ArrowLeft, ChevronDown } from 'lucide-react';
 import axios from 'axios';
+import api from '../../utils/api';
 import { showToast } from '../ui/Toast';
 
 const steps = [
@@ -23,12 +24,7 @@ const ApplicationForm = () => {
     setIsLoading(true);
     setError('');
     try {
-      const token = localStorage.getItem('token');
-      await axios.post(
-        'http://localhost:5000/api/applications',
-        data,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await api.post('/api/applications', data);
       setIsSubmitted(true);
       showToast.success('Application submitted successfully! We will review and notify you soon.');
     } catch (err) {
