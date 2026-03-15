@@ -3,6 +3,8 @@ import { GraduationCap, Users, Trophy, Globe, Star, Award, ArrowRight } from 'lu
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import WelcomePopup from '../components/common/WelcomePopup';
+import RollingNumber from '../components/ui/RollingNumber';
+
 
 // Memoized Stat Component for Performance
 const StatItem = memo(({ number, label, index }) => {
@@ -17,12 +19,13 @@ const StatItem = memo(({ number, label, index }) => {
       className="flex flex-col items-center text-center"
     >
       <div className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
-        {number}
+        {shouldReduceMotion ? number : <RollingNumber value={number} />}
       </div>
       <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
         {label}
       </div>
     </motion.div>
+
   );
 });
 StatItem.displayName = 'StatItem';
