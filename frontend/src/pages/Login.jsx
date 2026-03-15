@@ -79,23 +79,23 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
   }
 
   return (
-    <div className="min-h-screen flex font-sans bg-background">
+    <div className="min-h-screen flex font-sans bg-zinc-950">
       {/* Left side - Form */}
       <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:max-w-md">
-          <Link to="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground mb-10 transition-colors">
+          <Link to="/" className="inline-flex items-center text-sm font-medium text-zinc-400 hover:text-white mb-10 transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Link>
           
           <div className="mb-8">
-            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-              <GraduationCap className="h-7 w-7 text-primary" />
+            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 ring-1 ring-primary/20">
+              <GraduationCap className="h-8 w-8 text-primary" />
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">
+            <h2 className="text-4xl font-extrabold tracking-tight text-white mb-2 leading-tight">
               Welcome back
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-zinc-400 text-lg">
               Sign in to your EduWorld account to continue
             </p>
           </div>
@@ -129,9 +129,9 @@ const Login = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, set
                     <span className="px-2 bg-background text-muted-foreground">Or</span>
                   </div>
                 </div>
-                <p className="text-center text-sm text-muted-foreground mt-8">
+                <p className="text-center text-sm text-zinc-500 mt-8">
                   Don't have an account?{' '}
-                  <Link to="/register" className="font-semibold text-primary hover:underline transition-all">
+                  <Link to="/register" className="font-semibold text-primary hover:text-primary/80 transition-all">
                     Register now
                   </Link>
                 </p>
