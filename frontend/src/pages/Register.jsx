@@ -141,18 +141,19 @@ const Register = ({ isAuthenticated, setIsAuthenticated, userRole, setUserRole, 
 
       {/* Right side - Image/Decoration */}
       <div className="hidden lg:flex flex-1 relative bg-zinc-950 overflow-hidden items-center justify-center">
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-primary/20 to-zinc-950 pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay" />
+        {/* Deep Overlay Grid for Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-700/30 via-zinc-950/80 to-zinc-950 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80')] bg-cover bg-center opacity-50 z-0" />
         
-        <div className="relative z-10 max-w-2xl px-12 text-center text-white">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20 mb-8">
-            <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-            <span className="text-sm font-medium">Join 50,000+ Students</span>
+        <div className="relative z-20 max-w-2xl px-12 text-center text-white drop-shadow-2xl">
+          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-xl rounded-full px-5 py-2.5 border border-white/20 mb-10 shadow-lg">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-blue-400 animate-pulse shadow-[0_0_10px_rgba(96,165,250,0.5)]"></span>
+            <span className="text-sm font-semibold tracking-wide uppercase">Join 50,000+ Students</span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
-            Discover a community of innovators.
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-8 text-balance leading-[1.1]">
+            Discover a community of <span className="text-blue-400">innovators</span>.
           </h1>
-          <p className="text-lg md:text-xl text-zinc-300 text-balance leading-relaxed mx-auto max-w-xl">
+          <p className="text-xl md:text-2xl text-zinc-300 text-balance leading-relaxed mx-auto max-w-xl font-medium opacity-90">
             Register today to gain access to exclusive resources, world-class programs, and a network of professionals.
           </p>
         </div>
