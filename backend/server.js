@@ -27,7 +27,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-connectDB();
+// Use an asynchronous middleware to ensure connection is ready before any routes are hit
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("EduWorld API is running");

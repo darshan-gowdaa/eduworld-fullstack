@@ -34,7 +34,8 @@ const registerUser = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Register Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
@@ -61,7 +62,8 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Login Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
@@ -82,7 +84,8 @@ const getCurrentUser = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error" });
+    console.error("Get User Error:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 
