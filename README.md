@@ -2,6 +2,9 @@
 
 > ⚠️ **Disclaimer:** This project is not affiliated with any real educational institution or company. EduWorld is a portfolio project created solely to showcase full-stack development skills. All names, features, and content are for demonstration purposes only.
 
+**🌐 Live Demo:** [https://eduworld-phi.vercel.app/](https://eduworld-phi.vercel.app/)  
+**☁️ Hosted Infrastructure:** This application is hosted online using Vercel. The database relies on MongoDB Atlas (Free Tier) which is connected online for demonstration purposes.
+
 <p align="center">
   <a href="https://drive.google.com/drive/folders/1hGJpzq83Luf3ZU3eaJoWdDkaDJ_uAF5h?usp=drive_link">
     <img src="https://img.shields.io/badge/Watch%20Demo-Click%20Here-blue?style=for-the-badge&logo=google-drive" alt="Watch the Demo" />
@@ -13,30 +16,36 @@
 ## 📸 Screenshots
 
 <h3>Landing Page</h3>
-<img width="1919" height="904" alt="Landing Page" src="https://github.com/user-attachments/assets/1789a1c3-41f4-4615-a151-3bc322c21ef1" />
+<img width="1916" height="928" alt="image" src="https://github.com/user-attachments/assets/413e0c7a-3806-4e26-8928-db4b89bb2fad" />
 
 <h3>Footer</h3>
-<img width="1919" height="919" alt="Footer" src="https://github.com/user-attachments/assets/f4862a35-0107-427e-a289-887aa03c8501" />
+<img width="1918" height="931" alt="image" src="https://github.com/user-attachments/assets/03424c2f-fd0f-48d7-bdc7-ddeecc717248" />
 
 <h3>UI Sneak Peek 👀</h3>
-<img width="1112" height="908" alt="UI" src="https://github.com/user-attachments/assets/1b22ac2b-16ec-4774-91fe-ae5706aeda2c" />
+<img width="1301" height="910" alt="image" src="https://github.com/user-attachments/assets/acfc557b-0ab4-46be-9723-28b2ae9b9047" />
+
 
 <h3>ChatBot in Action</h3>
 <p>
-  <img src="https://github.com/user-attachments/assets/1fd84159-6e19-4c5f-8c3e-036a120efb9d" height="400" />
-  <img src="https://github.com/user-attachments/assets/e2b9b1f4-b142-41a0-8ddd-0b39f490afe9" height="400" />
+<img  height="400" alt="image" src="https://github.com/user-attachments/assets/d9b3d33d-c0c2-41eb-8e2c-cb05183b2086" />
+<img  height="400" alt="image" src="https://github.com/user-attachments/assets/25aaa2ba-5074-42be-ba41-f13230b87cef" />
+
 </p>
 
 <h3>Login & Register Pages</h3>
-<img width="1919" height="912" alt="Login" src="https://github.com/user-attachments/assets/72b9427a-653f-445f-9c40-d99f4d4c00fa" />
-<img width="1919" height="833" alt="Register" src="https://github.com/user-attachments/assets/c8d49087-688c-43e5-9055-d8ccfc17136b" />
+<p>
+<img width="48%" alt="image" src="https://github.com/user-attachments/assets/87ded1ed-3855-477a-8533-dcd9c87dff04" />
+<img width="48%" alt="image" src="https://github.com/user-attachments/assets/ff4c825f-9815-4510-a840-928b6bb023f4" />
+</p>
 
 <h3>Dashboards & Forms</h3>
-<img width="1601" height="816" alt="Dashboard" src="https://github.com/user-attachments/assets/a131c09b-1d7e-4457-8b5a-cbc1232bc61d" />
-<img width="1919" height="910" alt="Form" src="https://github.com/user-attachments/assets/f2f0d6a8-c2ba-4031-b15d-341734cdeef9" />
+<img width="1919" height="937" alt="image" src="https://github.com/user-attachments/assets/f98a8559-fa0e-4f10-a198-6151499a902d" />
+<img width="1917" height="942" alt="image" src="https://github.com/user-attachments/assets/3f4eaac8-d130-48ab-b3cf-434a958d2f13" />
+
 <img width="1919" height="831" alt="Form 2" src="https://github.com/user-attachments/assets/f63a3da4-706c-4b02-96b3-8ebce5f15a3c" />
 <img width="1919" height="912" alt="Form 3" src="https://github.com/user-attachments/assets/55f6c2ab-c7b8-4d28-a38c-f41aeefb1121" />
-<img width="1739" height="903" alt="Form 4" src="https://github.com/user-attachments/assets/d66859ba-2f5e-4a1c-b5e5-eed9c6ae4e6c" />
+<img width="1609" height="936" alt="image" src="https://github.com/user-attachments/assets/e0d535e4-28bc-4b62-8377-55957d9702ed" />
+
 
 ---
 
@@ -60,7 +69,7 @@ All feature demonstrations are available in the [Google Drive Demo Folder](https
 - 📝 **Applications & Enquiries** — Students can submit multi-step applications (personal info → academic details → course selection) with per-step validation. Enquiry form available on the Contact page.
 - 🎓 **Role-Based Dashboards** — Separate dashboards for **students** (apply, track status) and **faculty** (view all applications & enquiries, see platform stats).
 - 📊 **Analytics Dashboard** — Real-time counts for applications, enquiries, students, and faculty shown on the faculty dashboard.
-- 🔐 **Secure Authentication** — JWT-based login & registration with role-based access control (`student` / `faculty`). Passwords hashed with bcryptjs.
+- 🛡️ **Robust Security** — Passwords are securely hashed using `bcryptjs`. We use `jsonwebtoken` (JWT) for stateless authentication and authorization with role-based access control (`student` / `faculty`). API routes are protected by HTTP header security via `helmet`, cross-origin resource sharing governance via `cors`, and basic protection against brute-force/DDoS attacks using `express-rate-limit`.
 - 🛒 **Course Catalogue** — Browse UG and PG programs with search, category filters, sort options, favouriting, and animated cards.
 - 🌐 **Multi-Channel Contact** — Phone, email, WhatsApp, and the full contact form with subject, priority level, and preferred contact method.
 - ☁️ **Vercel-Ready** — Configured for serverless deployment with `vercel.json` routing API requests to Express and serving the React SPA for all other routes.
@@ -255,8 +264,8 @@ Base URL (local): `http://localhost:5000/api`
 **Register / Login payload:**
 ```json
 {
-  "name": "Jane Doe",
-  "email": "jane@example.com",
+  "name": "Kavya Reddy",
+  "email": "kavya.reddy@example.com",
   "password": "password123",
   "role": "student"
 }
@@ -266,7 +275,7 @@ Base URL (local): `http://localhost:5000/api`
 ```json
 {
   "token": "<jwt>",
-  "user": { "id": "...", "name": "Jane Doe", "email": "...", "role": "student" }
+  "user": { "id": "...", "name": "Kavya Reddy", "email": "...", "role": "student" }
 }
 ```
 
@@ -369,8 +378,8 @@ The chatbot (`ChatBot.jsx` + `chatbotData.js`) works entirely client-side with n
 
 ## 📬 Contact
 
-- **Email:** dummy@email.com
-- **Phone/WhatsApp:** +91 9876543210
+- **Email:** contact@eduworld.in
+- **Phone/WhatsApp:** +91 99000 11223
 - [Open an Issue](https://github.com/darshan-gowdaa/eduworld-fullstack/issues)
 - [GitHub Profile](https://github.com/darshan-gowdaa)
 

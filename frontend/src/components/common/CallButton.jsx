@@ -12,17 +12,17 @@ const CallButton = () => {
   }, []);
 
   const handleCall = () => {
-    window.location.href = 'tel:+919876543210';
+    window.location.href = 'tel:+18005550199';
     setShowPopup(false);
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/919876543210?text=Hello! I have a question about EduWorld.', '_blank');
+    window.open('https://wa.me/18005550199?text=Hello! I have a question about EduWorld.', '_blank');
     setShowPopup(false);
   };
 
   const handleEmail = () => {
-    window.location.href = 'mailto:dummy@email.com?subject=EduWorld Inquiry';
+    window.location.href = 'mailto:contact@eduworld.edu?subject=EduWorld Inquiry';
     setShowPopup(false);
   };
 

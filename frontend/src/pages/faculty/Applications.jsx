@@ -44,7 +44,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'Siri Gowda',
       email: 'siri.gowda@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Computer Science',
     status: 'approved',
@@ -56,7 +56,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'Mahesh K',
       email: 'mahesh.k@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Data Science',
     status: 'rejected',
@@ -68,7 +68,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'Rajesh K',
       email: 'rajesh.k@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Business Administration',
     status: 'pending',
@@ -80,7 +80,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'Dhanush M',
       email: 'dhanush.m@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Computer Science',
     status: 'approved',
@@ -92,7 +92,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'Liya Joseph',
       email: 'liya.j@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Psychology',
     status: 'rejected',
@@ -104,7 +104,7 @@ const mockApplications = [
     personalInfo: {
       fullName: 'James Dzosua',
       email: 'james.d@email.com',
-      phone: '+91 9876543210'
+      phone: '+91 99000 11223'
     },
     courseSelected: 'Engineering',
     status: 'pending',

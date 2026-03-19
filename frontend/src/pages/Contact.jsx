@@ -130,24 +130,24 @@ const Contact = () => {
       icon: Phone,
       title: 'Phone',
       subtitle: 'Call us directly',
-      info: '+91 9876543210',
+      info: '+91 99000 11223',
       subInfo: 'WhatsApp Available',
-      action: 'tel:+919876543210'
+      action: 'tel:+919900011223'
     },
     {
       icon: Mail,
       title: 'Email',
       subtitle: 'Send us a message',
-      info: 'dummy@email.com',
+      info: 'contact@eduworld.in',
       subInfo: 'Response within 24hrs',
-      action: 'mailto:dummy@email.com'
+      action: 'mailto:contact@eduworld.in'
     },
     {
       icon: MapPin,
       title: 'Address',
       subtitle: 'Visit our campus',
-      info: 'Nagasandra, Bengaluru',
-      subInfo: 'Karnataka - 560073',
+      info: 'Tech Park, Koramangala',
+      subInfo: 'Bengaluru, Karnataka 560034',
       action: '#'
     },
     {
@@ -265,7 +265,7 @@ const Contact = () => {
                       value={formData.firstName}
                       onChange={handleInputChange}
                       className={errors.firstName ? 'border-destructive focus-visible:ring-destructive/20' : ''}
-                      placeholder="Jane"
+                      placeholder="Kavya"
                     />
                     {errors.firstName && (<p className="text-xs text-destructive font-medium">{errors.firstName}</p>)}
                   </div>
@@ -278,7 +278,7 @@ const Contact = () => {
                       value={formData.lastName}
                       onChange={handleInputChange}
                       className={errors.lastName ? 'border-destructive focus-visible:ring-destructive/20' : ''}
-                      placeholder="Doe"
+                      placeholder="Reddy"
                     />
                     {errors.lastName && (<p className="text-xs text-destructive font-medium">{errors.lastName}</p>)}
                   </div>
@@ -294,7 +294,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       className={errors.email ? 'border-destructive focus-visible:ring-destructive/20' : ''}
-                      placeholder="jane@example.com"
+                      placeholder="kavya.reddy@example.com"
                     />
                     {errors.email && (<p className="text-xs text-destructive font-medium">{errors.email}</p>)}
                   </div>
@@ -307,7 +307,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={errors.phone ? 'border-destructive focus-visible:ring-destructive/20' : ''}
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+91 99000 11223"
                     />
                     {errors.phone && (<p className="text-xs text-destructive font-medium">{errors.phone}</p>)}
                   </div>
@@ -459,16 +459,16 @@ const Contact = () => {
                     Need an immediate response? Our enrollment advisors are online and ready to guide you.
                   </p>
                   <div className="space-y-3">
-                    <a href="tel:+919876543210" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
+                    <a href="tel:+919900011223" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
                       <div className="bg-background/10 p-2 rounded-lg mr-4">
                         <Phone className="h-5 w-5 text-background" />
                       </div>
                       <div className="flex-1">
                         <div className="text-sm font-semibold text-background">Call Advisor</div>
-                        <div className="text-xs text-background/70 mt-0.5">Available 9am - 6pm EST</div>
+                        <div className="text-xs text-background/70 mt-0.5">Available 9am - 6pm IST</div>
                       </div>
                     </a>
-                    <a href="https://wa.me/919876543210" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
+                    <a href="https://wa.me/919900011223" className="flex items-center bg-background/10 hover:bg-background/20 border border-background/10 p-4 rounded-xl transition-colors group">
                       <div className="bg-background/10 p-2 rounded-lg mr-4">
                         <MessageCircle className="h-5 w-5 text-background" />
                       </div>

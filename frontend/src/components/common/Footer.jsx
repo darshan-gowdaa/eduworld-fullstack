@@ -62,16 +62,16 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3 group">
                 <Phone className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                <span className="text-sm text-muted-foreground font-medium group-hover:text-foreground transition-colors">+91 9876543210</span>
+                <span className="text-sm text-muted-foreground font-medium group-hover:text-foreground transition-colors">+1 (800) 555-0199</span>
               </div>
               <div className="flex items-center space-x-3 group">
                 <Mail className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                <span className="text-sm text-muted-foreground font-medium group-hover:text-foreground transition-colors">dummy@email.com</span>
+                <span className="text-sm text-muted-foreground font-medium group-hover:text-foreground transition-colors">contact@eduworld.edu</span>
               </div>
               <div className="flex items-start space-x-3 group">
                 <MapPin className="h-4 w-4 text-muted-foreground mt-0.5 group-hover:text-foreground transition-colors" />
                 <span className="text-sm text-muted-foreground font-medium max-w-[200px] leading-relaxed group-hover:text-foreground transition-colors">
-                  Nagasandra, Bengaluru - 560073
+                  123 Innovation Dr, San Francisco, CA 94105
                 </span>
               </div>
             </div>

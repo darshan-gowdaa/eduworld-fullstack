@@ -72,7 +72,7 @@ const EnquiryForm = () => {
             <Input 
               {...register('name', { required: 'Name is required' })} 
               className={errors.name ? 'border-destructive focus-visible:ring-destructive/20' : ''} 
-              placeholder="e.g. Jane Doe" 
+              placeholder="e.g. Kavya Reddy" 
             />
             {errors.name && <p className="text-destructive text-xs mt-1 flex items-center"><AlertCircle className="h-3 w-3 mr-1" />{errors.name.message}</p>}
           </div>
@@ -83,7 +83,7 @@ const EnquiryForm = () => {
               type="email"
               {...register('email', { required: 'Email is required' })} 
               className={errors.email ? 'border-destructive focus-visible:ring-destructive/20' : ''} 
-              placeholder="jane@example.com" 
+              placeholder="kavya.reddy@example.com" 
             />
             {errors.email && <p className="text-destructive text-xs mt-1 flex items-center"><AlertCircle className="h-3 w-3 mr-1" />{errors.email.message}</p>}
           </div>
