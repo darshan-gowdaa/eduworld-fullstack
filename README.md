@@ -264,9 +264,9 @@ Base URL (local): `http://localhost:5000/api`
 **Register / Login payload:**
 ```json
 {
-  "name": "Kavya Reddy",
-  "email": "kavya.reddy@example.com",
-  "password": "password123",
+  "name": "Mindri Mahesh",
+  "email": "mindri.mahesh@example.com",
+  "password": "$tR0ngp@$$word67",
   "role": "student"
 }
 ```
@@ -275,7 +275,7 @@ Base URL (local): `http://localhost:5000/api`
 ```json
 {
   "token": "<jwt>",
-  "user": { "id": "...", "name": "Kavya Reddy", "email": "...", "role": "student" }
+  "user": { "id": "...", "name": "Mindri Mahesh", "email": "...", "role": "student" }
 }
 ```
 
@@ -378,8 +378,6 @@ The chatbot (`ChatBot.jsx` + `chatbotData.js`) works entirely client-side with n
 
 ## 📬 Contact
 
-- **Email:** contact@eduworld.in
-- **Phone/WhatsApp:** +91 99000 11223
 - [Open an Issue](https://github.com/darshan-gowdaa/eduworld-fullstack/issues)
 - [GitHub Profile](https://github.com/darshan-gowdaa)
 
